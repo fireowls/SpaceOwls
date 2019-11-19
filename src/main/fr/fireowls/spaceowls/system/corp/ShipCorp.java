@@ -20,6 +20,10 @@ public class ShipCorp extends Corp{
 		this.vitY = vity;
 	}
 	
+	public ShipCorp(Object[] ds) {
+		this(new Location((double)ds[0],(double)ds[1]),(double)ds[2],(double)ds[3],(double)ds[4],(double)ds[5]);
+	}
+	
 	public String toString() {
 		return this.type.getName()+"["+this.mass+","+this.location.toString()+","+vitX+","+vitY+","+pprincipal+","+pretro+"]";
 	}

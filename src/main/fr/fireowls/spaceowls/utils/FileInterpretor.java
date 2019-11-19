@@ -15,6 +15,7 @@ import fr.fireowls.spaceowls.system.corp.CorpType;
 /**
  * Class qui permet l'interpretaion de fichier systeme (.astro) pour créer le systeme et les objets preciser dans le ficher
  * @author bankaerb
+ * @version 1.7.1
  *
  */
 public class FileInterpretor {
@@ -22,6 +23,7 @@ public class FileInterpretor {
 	private BufferedReader br;
 	private FileReader fr;
 	private ArrayList<String> content;
+	private ArrayList<Corp> corpCreated;
 	
 	public static void main(String[] args) {
 		FileInterpretor fi = new FileInterpretor("04_ExempleDuSujet.astro");
@@ -53,6 +55,7 @@ public class FileInterpretor {
 			System.out.println("Fichier "+fileName+" trouvé.");
 		}
 		this.content = new ArrayList<String>();
+		this.corpCreated = new ArrayList<>();
 	}
 
 	/**
@@ -114,22 +117,51 @@ public class FileInterpretor {
 			String name = this.content.get(i).split(":")[0];
 			String line = this.content.get(i).split(":")[1].substring(1);
 			line = line.substring(0,line.length()-1);
-			double[] args = getAllArguments(line);
+			Object[] args = getAllArguments(line);
 			double mass = Double.parseDouble(line.split(" ")[1].split("=")[1]);
-			Corp c = CorpFactory.createCorp(name, args);
+			Corp c = CorpFactory.createCorp(getCorpType(line), args);
 			c.setMass(mass);
+			c.setName(name);
 			elements.add(c);
+			this.corpCreated.add(c);
+			System.out.println("Corp "+name+" created!");
 		}
 		return elements;
-	} 
+	}
 	
-	public double[] getAllArguments(String s) {
+	/**
+	 * Methode qui retour le type de corp de la ligne passé en parametre
+	 * @param line est la ligne du corp
+	 * @return le type du corp
+	 */
+	public CorpType getCorpType(String line) {
+		String type = line.split(" ")[0];
+		if(type.equals(CorpType.STATIC.getName())) return CorpType.STATIC;
+		else if(type.equals(CorpType.SIMULE.getName())) return CorpType.SIMULE;
+		else if(type.equals(CorpType.VAISSEAU.getName())) return CorpType.VAISSEAU;
+		else if(type.equals(CorpType.ELLIPSE.getName())) return CorpType.ELLIPSE;
+		return null;
+	}
+	
+	public Object[] getAllArguments(String s) {
 		int nbOfArgs = s.split(" ").length;
-		double[] args = new double[nbOfArgs-2];
+		Object[] args = new Object[nbOfArgs-2];
 		for(int i = 2; i < nbOfArgs; i++) {
-			args[i-2] = Double.parseDouble(s.split(" ")[i].split("=")[1]);
+			if(s.split(" ")[i].split("=")[0].contains("f1") || s.split(" ")[i].split("=")[0].contains("f2")) {
+				args[i-2] = getCreatedCorp(s.split(" ")[i].split("=")[1]);
+			}else {
+				args[i-2] = Double.parseDouble(s.split(" ")[i].split("=")[1]);
+			}
+			
 		}
 		return args;
 		
+	}
+	
+	public Corp getCreatedCorp(String name) {
+		for(Corp c:this.corpCreated) {
+			if(c.getName().equals(name)) return c;
+		}
+		return null;
 	}
 }

@@ -16,6 +16,7 @@ public class Corp implements Updatable {
 	protected Location location;
 	
 	protected double mass;
+	protected String name;
 
 	public Corp(CorpType type, Location location) {
 		this(type, location, null, null);
@@ -94,6 +95,14 @@ public class Corp implements Updatable {
 	
 	public void setMass(double mass) {
 		this.mass = mass;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
