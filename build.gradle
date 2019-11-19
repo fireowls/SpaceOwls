@@ -1,0 +1,118 @@
+plugins {
+    id 'java'
+}
+
+def mainClass = "fr.fireowls.spaceowls.SpaceOwls"
+def srcMain = 'src/main'
+def srcTest = 'src/test'
+
+
+def createTest(File file) {
+    if (!file.isDirectory()) {
+
+        def main = "$projectDir/src/main".replace("\\", "/")
+        def test = "$projectDir/src/test".replace("\\", "/")
+
+
+        def testFile = new File(
+                file.path.replace("\\", "/").replace("$main", "$test")
+                .replace(file.name, "Test$file.name")
+        )
+
+        if (!testFile.exists() && testFile.path.endsWith(".java")) {
+            println("Create file: $testFile.path\n" +
+                    "  from file: $file.path")
+            testFile.getParentFile().mkdirs()
+            testFile.createNewFile()
+
+            def packageName = testFile.parentFile.path.replace("\\", "/").replace("$test/", "").replace("$testFile.name", "").replace("/", ".")
+            def className = testFile.name.replace(".java", "")
+
+
+            testFile.text =
+                    """package ${packageName};  
+
+import org.junit.Test;
+import org.junit.Before;
+import static org.junit.Assert.*;
+
+public class ${className} {
+
+    @Before
+    public final void init() {
+        System.out.println("Init test: ${className.replace("Test", "")} !");
+    }
+    
+    @Test
+    public final void test${className}() {
+        fail("Not yet implemented");
+    }
+
+}
+"""
+
+        }
+
+    } else {
+        file.listFiles().each {
+            createTest(it)
+        }
+    }
+}
+
+
+
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+version = 'ALPHA-0.1'
+
+sourceSets {
+    main.java.srcDirs = [srcMain]
+    test.java.srcDirs = [srcTest]
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+test {
+    testLogging {
+        showStandardStreams = true
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': "$mainClass",
+                'classpath': '/'
+        )
+    }
+}
+
+task generateTests {
+    group 'verification'
+    description 'gener automatique une class de test pour chaque class du projet'
+    doLast {
+
+        def srcDir = file("$srcMain")
+        println "Generate for $srcDir.name"
+        createTest(srcDir)
+
+    }
+}
+
+task run(type: JavaExec) {
+    group 'application'
+    description 'lance l\'application'
+    doFirst {
+        println "run application..."
+    }
+    classpath = sourceSets.main.runtimeClasspath
+    main = "$mainClass"
+}
