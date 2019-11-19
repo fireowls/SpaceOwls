@@ -84,13 +84,13 @@ public class Trajectory implements Updatable {
 
 	@Override
 	public void update(double delta) {
+		
 		timer = engine.getTimer() - startTrajectory;
 		System.out.println(location + " " + xCalculator.handle(timer) + " " + yCalculator.handle(timer));
-		/*
 		location.move(
 				xCalculator.handle(timer),
 				yCalculator.handle(timer)
-		);*/
+		);
 	}
 
 	@Override

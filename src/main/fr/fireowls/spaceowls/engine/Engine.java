@@ -12,26 +12,18 @@ public class Engine implements Updatable {
     private TaskManager taskManager;
     private ScreenManager screenManager;
     private EngineLoop engineLoop;
-
+    
     private OwlPainter painter;
 
     public Engine() {
         this.taskManager = new TaskManager("engine-tasks");
         this.screenManager = new ScreenManager();
+        engineLoop = new EngineLoop(this);
         fps = 0;
     }
 
     public void start() {
-        engineLoop = new EngineLoop(this);
         engineLoop.start();
-    }
-
-    public void pause() {
-        engineLoop.pause();
-    }
-
-    public void resume() {
-        engineLoop.resume();
     }
 
     @Override

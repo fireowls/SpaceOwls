@@ -31,7 +31,11 @@ public class TaskManager {
         for (int i = 0 ; i < tasks.size() ; i++) {
             if (tasks.get(i).equals(task)) {
                 tasks.remove(i);
-                task.getThread().stop();
+                try {
+					task.getThread().join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
                 i--;
             }
         }

@@ -4,8 +4,7 @@ import fr.fireowls.spaceowls.screen.Screen;
 
 public enum Scenes {
 
-    MAIN(MainScreen.class),
-    TEST(TestScreen.class);
+    MAIN(MainScreen.class);
 
     private Class<? extends Screen> c;
 

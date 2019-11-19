@@ -36,7 +36,7 @@ public class ScreenContext {
 
         Canvas canvas = new Canvas();
         canvas.setHeight(getHeight());
-        canvas.setWidth(getWith());
+        canvas.setWidth(getWidth());
 
         this.graphicsContext = canvas.getGraphicsContext2D();
         this.painter = new OwlPainter(graphicsContext, camera);
@@ -49,8 +49,6 @@ public class ScreenContext {
 
         stage.show();
         stage.setOnCloseRequest(event -> engine.dispose());
-        stage.setOnHidden(event -> engine.pause());
-        stage.setOnShown(event -> engine.resume());
     }
 
     public String getTitle() {
@@ -61,7 +59,7 @@ public class ScreenContext {
         this.stage.setTitle(title);
     }
 
-    public void setWith(int with) {
+    public void setWidth(int with) {
         this.stage.setWidth(with);
     }
 
@@ -69,7 +67,7 @@ public class ScreenContext {
         this.stage.setHeight(height);
     }
 
-    public double getWith() {
+    public double getWidth() {
         return this.stage.getWidth();
     }
 
@@ -79,7 +77,7 @@ public class ScreenContext {
 
     public void setSize(int height, int with) {
         setHeight(height);
-        setWith(with);
+        setWidth(with);
     }
 
     public void setStage(Stage stage) {

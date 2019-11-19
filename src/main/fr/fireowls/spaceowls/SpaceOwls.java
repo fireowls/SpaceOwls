@@ -25,10 +25,10 @@ public class SpaceOwls extends Application {
         engine = new Engine();
         context = new ScreenContext(primaryStage);
         context.initStage(engine);
-        engine.start();
 
         ScreenManager screenManager = engine.getScreenManager();
         screenManager.loadScreen(Scenes.MAIN);
-
+        
+        engine.start();
     }
 }
