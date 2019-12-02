@@ -11,8 +11,10 @@ import fr.fireowls.spaceowls.utils.FileInterpretor;
 import fr.fireowls.spaceowls.utils.Location;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -36,14 +38,22 @@ public class SpaceOwls extends Application{
     @Override
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
-        long lastTime = System.nanoTime();
+
         canvas = new Canvas(1500,1000);
 
         FileInterpretor fi = new FileInterpretor("01_CorpsTombeSurSoleil.astro");
         ss = fi.createSystem();
-        SimuleCorp c = new SimuleCorp(new Location(0,100), 0, 0, ss);
+
+        StaticCorp c1 = new StaticCorp(new Location(200, 200));
+        c1.setMass(40);
+
+        StaticCorp c2 = new StaticCorp(new Location(1000, 500));
+        c2.setMass(400);
+
+        SimuleCorp c = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
         c.setMass(1);
-        ss.addCorp(c);
+        ss.addCorp(c1, c2, c);
+
 
 
         VBox vBox = new VBox(canvas);
@@ -69,20 +79,4 @@ public class SpaceOwls extends Application{
     private void update(double delta) {
         ss.update(delta);
     }
-
-    /*public synchronized void start() {
-        thread = new Thread(this);
-        thread.start();
-        running = true;
-    }*/
-
-   /* public synchronized void stop() {
-        try {
-            thread.join();
-            running = false;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }*/
-
 }
