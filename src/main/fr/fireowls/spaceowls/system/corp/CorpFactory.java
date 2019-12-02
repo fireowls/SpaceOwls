@@ -1,24 +1,54 @@
 package fr.fireowls.spaceowls.system.corp;
 
+import fr.fireowls.spaceowls.utils.Location;
+
 import java.lang.reflect.InvocationTargetException;
 
 public class CorpFactory {
 
 	/**
-	 * Methode qui inctancier un corp en fonction du type passé en parametre
-	 * @param name est le nom du corp
-	 * @param type est le type du corp (Static,Simule,Ship,..)
-	 * @param doubles est la liste des parametre du corp
-	 * @return le corp en fonction des parametre donné
+	 * Créer un corp static
+	 * @param location est la position du corp
+	 * @return le corp
 	 */
-	public static Corp createCorp(CorpType type,Object[] objs) {
-		try {
-			return type.getCorpClass().getConstructor(Object[].class).newInstance(objs);
-		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
-				| NoSuchMethodException | SecurityException e) {
-			e.printStackTrace();
-			return null;
-		}
+	public static Corp createStaticCorp(Location location){
+		return new StaticCorp(location);
+	}
+
+	/**
+	 * Créer un corp simulé
+	 * @param location est la position du corp
+	 * @param vitX est la vitesse en X du corp
+	 * @param vitY est la vitesse en Y du corp
+	 * @return le corp
+	 */
+	public static Corp createSimuleCorp(Location location,double vitX,double vitY){
+		return new SimuleCorp(location,vitX,vitY);
+	}
+
+	/**
+	 * Créer un vaisseau
+	 * @param location est la position du vaisseau
+	 * @param vitX est la vitesse en X
+	 * @param vitY est la vitesse en Y
+	 * @param pprincipal est la force de propulsion principale
+	 * @param pretro est la force de propulsion retro
+	 * @return le corp
+	 */
+	public static Corp createShipCorp(Location location,double vitX,double vitY,double pprincipal,double pretro){
+		return new ShipCorp(location,vitX,vitY,pprincipal,pretro);
+	}
+
+	/**
+	 * Créer un corp ellipse
+	 * @param location est la location du corp
+	 * @param c1 est un corp
+	 * @param c2 est un corp
+	 * @param periode est la periode
+	 * @return le corp
+	 */
+	public static Corp createEllipseCorp(Location location,Corp c1,Corp c2,int periode){
+		return new EllipseCorp(location,c1,c2,periode);
 	}
 
 }

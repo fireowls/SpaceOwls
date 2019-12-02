@@ -6,7 +6,7 @@ import fr.fireowls.spaceowls.utils.Location;
 
 public class SimuleCorp extends Corp{
 
-	public SimuleCorp(Location location, int vitx,int vity) {
+	public SimuleCorp(Location location, double vitx,double vity) {
 		super(CorpType.SIMULE, location);
 		this.setTrajectory(new SimulateTrajectory(MainScreen.ss ,this,vitx,vity));
 	}
