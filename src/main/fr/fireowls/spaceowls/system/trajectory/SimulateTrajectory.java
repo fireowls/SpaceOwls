@@ -24,10 +24,12 @@ public class SimulateTrajectory extends Trajectory {
 	 * constructeur
 	 * @param corp l'objet qui parcours la trajectoire simulée
 	 */
-	public SimulateTrajectory(SpaceSystem ss, SimuleCorp corp) {
+	public SimulateTrajectory(SpaceSystem ss, SimuleCorp corp, double vitX, double vitY) {
 		super(TrajectoryType.SIMULATE);
 		this.ss = ss;
 		this.corp = corp;
+		this.vitX = vitX;
+		this.vitY = vitY;
 	}
 	
 	@Override

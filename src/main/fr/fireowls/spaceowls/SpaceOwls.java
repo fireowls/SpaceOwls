@@ -7,6 +7,7 @@ import fr.fireowls.spaceowls.screen.scene.Scenes;
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.corp.*;
 import fr.fireowls.spaceowls.system.trajectory.ElipseTrajectory;
+import fr.fireowls.spaceowls.utils.FileInterpretor;
 import fr.fireowls.spaceowls.utils.Location;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -36,13 +37,13 @@ public class SpaceOwls extends Application{
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
         long lastTime = System.nanoTime();
-        ss = new SpaceSystem(0, 0.1, 0, 1000);
         canvas = new Canvas(1500,1000);
-        Location l = new Location(10,10);
-        corp = new SimuleCorp(l, ss);
 
-
-        ss.addCorp(corp);
+        FileInterpretor fi = new FileInterpretor("01_CorpsTombeSurSoleil.astro");
+        ss = fi.createSystem();
+        SimuleCorp c = new SimuleCorp(new Location(0,100), 0, 0, ss);
+        c.setMass(1);
+        ss.addCorp(c);
 
 
         VBox vBox = new VBox(canvas);
@@ -52,7 +53,7 @@ public class SpaceOwls extends Application{
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update(ss.getDt());
+                update(ss.getDt()*1000);
                 render(stage);
             }
         };
@@ -67,7 +68,6 @@ public class SpaceOwls extends Application{
 
     private void update(double delta) {
         ss.update(delta);
-        System.out.println(corp.getLocation().getX() + " "+ corp.getLocation().getY());
     }
 
     /*public synchronized void start() {
