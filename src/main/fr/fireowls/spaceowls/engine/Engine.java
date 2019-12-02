@@ -4,6 +4,7 @@ import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.screen.ScreenManager;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.tasks.TaskManager;
+import javafx.scene.canvas.Canvas;
 
 public class Engine implements Updatable {
 
@@ -37,8 +38,8 @@ public class Engine implements Updatable {
     }
 
     @Override
-    public void render(OwlPainter painter) {
-        screenManager.render(painter);
+    public void render(Canvas canvas) {
+        screenManager.render(canvas);
     }
 
     @Override

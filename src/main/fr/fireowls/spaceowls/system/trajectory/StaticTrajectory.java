@@ -13,4 +13,9 @@ public class StaticTrajectory extends Trajectory {
     public StaticTrajectory() {
         super(TrajectoryType.STATIC);
     }
+
+    @Override
+    public void update(double dt) {
+
+    }
 }

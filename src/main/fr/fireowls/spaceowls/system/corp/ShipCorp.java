@@ -27,7 +27,7 @@ public class ShipCorp extends Corp{
 	@Override
 	public void create() {
 		super.create();
-		SpaceOwls.context.getStage().addEventHandler(KeyEvent.KEY_PRESSED, (key)->{
+		SpaceOwls.stage.addEventHandler(KeyEvent.KEY_PRESSED, (key)->{
 			if(key.getCode()==KeyCode.UP)
 				this.vitX += pprincipal;
 			if(key.getCode()==KeyCode.DOWN)

@@ -2,6 +2,7 @@ package fr.fireowls.spaceowls.screen;
 
 import fr.fireowls.spaceowls.screen.scene.Scenes;
 import fr.fireowls.spaceowls.utils.Updatable;
+import javafx.scene.canvas.Canvas;
 
 import java.util.Stack;
 
@@ -34,9 +35,9 @@ public class ScreenManager implements Updatable {
     }
 
     @Override
-    public void render(OwlPainter painter) {
+    public void render(Canvas canvas) {
         if (screens.size() > 0)
-            screens.peek().render(painter);
+            screens.peek().render(canvas);
     }
 
     @Override

@@ -66,7 +66,7 @@ public class EngineLoop implements Runnable {
 				delta--;
 			}
 			if(running)
-				engine.render(engine.getPainter());
+				//engine.render(engine.getPainter());
 			frames++;
 			
 			if(System.currentTimeMillis() - timer > 1000) {

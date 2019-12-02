@@ -2,6 +2,7 @@ package fr.fireowls.spaceowls.utils.hitbox;
 
 import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.utils.Updatable;
+import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,10 +90,10 @@ public class HitBoxManager implements Updatable {
     }
 
     @Override
-    public void render(OwlPainter painter) {
+    public void render(Canvas canvas) {
         if (show)
             for (HitBox hitbox : hitBoxes)
-                hitbox.render(painter);
+                hitbox.render(canvas);
     }
 
     @Override

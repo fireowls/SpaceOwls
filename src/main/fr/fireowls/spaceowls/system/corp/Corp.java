@@ -5,6 +5,7 @@ import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.HitBox;
+import javafx.scene.canvas.Canvas;
 
 public class Corp implements Updatable {
 
@@ -44,14 +45,15 @@ public class Corp implements Updatable {
 
 	@Override
 	public void update(double delta) {
-		if (hitBox != null) hitBox.update(delta);
+		//if (hitBox != null) hitBox.update(delta);
 		if (trajectory != null) trajectory.update(delta);
 	}
 
 	@Override
-	public void render(OwlPainter painter) {
-		if (hitBox != null) hitBox.render(painter);
-		if (trajectory != null) trajectory.render(painter);
+	public void render(Canvas canvas) {
+		//if (hitBox != null) hitBox.render(painter);
+		//if (trajectory != null) trajectory.render(painter);
+		canvas.getGraphicsContext2D().fillOval(location.getX(), location.getY(), 50, 50);
 	}
 
 	@Override

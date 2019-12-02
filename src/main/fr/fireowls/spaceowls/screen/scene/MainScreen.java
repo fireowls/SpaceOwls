@@ -10,6 +10,7 @@ import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.hitbox.CircleHitBox;
 import fr.fireowls.spaceowls.utils.hitbox.HitBox;
+import javafx.scene.canvas.Canvas;
 
 public class MainScreen extends Screen {
 
@@ -47,10 +48,8 @@ public class MainScreen extends Screen {
     }
 
     @Override
-    public void render(OwlPainter painter) {
-        painter.clear();
-        painter.fillText(SpaceOwls.engine.getFPS()+"", 10, 10);
-        ss.render(painter);
+    public void render(Canvas canvas) {
+        ss.render(canvas);
     }
 
     @Override

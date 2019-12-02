@@ -17,8 +17,8 @@ public class SimulateTrajectory extends Trajectory {
 	 */
 	private SpaceSystem ss;
 	private SimuleCorp corp;
-	private double vitX;
-	private double vitY;
+	private double vitX = 1;
+	private double vitY = 1;
 	
 	/**
 	 * constructeur
@@ -32,7 +32,7 @@ public class SimulateTrajectory extends Trajectory {
 	
 	@Override
 	public void update(double delta) {
-		timer = engine.getTimer() - startTrajectory;
+		//timer = engine.getTimer() - startTrajectory;
 		for(Corp c : ss.getCorps()) {
 			if(!c.equals(corp)) {
 				applicateStrength(c);

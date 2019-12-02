@@ -61,3 +61,4 @@ pom.xml.tag
 .gradle
 /bin/
 /.metadata/
+gradle.properties

@@ -1,5 +1,6 @@
 package fr.fireowls.spaceowls.system;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.HitBoxManager;
+import javafx.scene.canvas.Canvas;
 
 /**
  * Classe qui gere le systeme planetaire
@@ -147,16 +149,16 @@ public class SpaceSystem implements Updatable{
 		for(Corp c : this.corps) {
 			c.update(delta);
 		}
-		hitboxManager.update(delta);
+		//hitboxManager.update(delta);
 	}
 
 
 	@Override
-	public void render(OwlPainter painter) {
+	public void render(Canvas canvas) {
 		for(Corp c : this.corps) {
-			c.render(painter);
+			c.render(canvas);
 		}
-		hitboxManager.render(painter);
+		//hitboxManager.render(canvas);
 	}
 
 

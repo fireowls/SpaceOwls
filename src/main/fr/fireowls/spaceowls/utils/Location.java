@@ -42,7 +42,7 @@ public class Location extends Observable implements Observer {
 
 	public void link(Location location) {
 		location.move(this);
-		this.addObserver(location);
+		if(!location.equals(this)) this.addObserver(location);
 	}
 
 	public void unLink(Location location) {

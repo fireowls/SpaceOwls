@@ -7,6 +7,7 @@ import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.Vector;
+import javafx.scene.canvas.Canvas;
 
 /**
  * Class mère de toutes les trajectoires
@@ -53,7 +54,7 @@ public class Trajectory implements Updatable {
 	/**
 	 * gestion des thread
 	 */
-	protected Engine engine;
+	//protected Engine engine;
 
 	/**
 	 * constructeur
@@ -69,7 +70,7 @@ public class Trajectory implements Updatable {
 		timer = 0;
 		startTrajectory = 0;
 
-		engine = SpaceOwls.engine;
+		//engine = SpaceOwls.engine;
 	}
 
 	@Override
@@ -79,22 +80,22 @@ public class Trajectory implements Updatable {
 
 		xCalculator = xCalculator != null ? xCalculator : dt -> 0;
 		yCalculator = yCalculator != null ? yCalculator : dt -> 0;
-		startTrajectory = engine.getTimer();
+		//startTrajectory = engine.getTimer();
 	}
 
 	@Override
-	public void update(double delta) {
+	public void update(double dt) {
 		
-		timer = engine.getTimer() - startTrajectory;
+		//timer = engine.getTimer() - startTrajectory;
 		System.out.println(location + " " + xCalculator.handle(timer) + " " + yCalculator.handle(timer));
 		location.move(
-				xCalculator.handle(timer),
-				yCalculator.handle(timer)
+				xCalculator.handle(dt),
+				yCalculator.handle(dt)
 		);
 	}
 
 	@Override
-	public void render(OwlPainter painter) {}
+	public void render(Canvas canvas) {}
 
 	@Override
 	public void dispose() {}

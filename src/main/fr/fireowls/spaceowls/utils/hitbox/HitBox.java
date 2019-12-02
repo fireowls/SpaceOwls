@@ -8,6 +8,7 @@ import fr.fireowls.spaceowls.utils.hitbox.collidable.OnContact;
 import fr.fireowls.spaceowls.utils.hitbox.collidable.OnEnter;
 import fr.fireowls.spaceowls.utils.hitbox.collidable.OnExit;
 import fr.fireowls.spaceowls.utils.hitbox.shape.HitBoxShape;
+import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +59,9 @@ public abstract class HitBox implements Collidable, Updatable {
     public void update(double delta) {}
 
     @Override
-    public void render(OwlPainter painter) {
+    public void render(Canvas canvas) {
         if (show) {
-            draw(painter);
+            //draw
         }
     }
 
