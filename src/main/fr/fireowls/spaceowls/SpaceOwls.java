@@ -41,10 +41,11 @@ public class SpaceOwls extends Application{
 
         canvas = new Canvas(1500,1000);
 
-        FileInterpretor fi = new FileInterpretor("01_CorpsTombeSurSoleil.astro");
+        FileInterpretor fi = new FileInterpretor("02_PlanèteTourne.astro");
+        //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
 
-        StaticCorp c1 = new StaticCorp(new Location(200, 200));
+        /*StaticCorp c1 = new StaticCorp(new Location(200, 200));
         c1.setMass(40);
 
         StaticCorp c2 = new StaticCorp(new Location(1000, 500));
@@ -52,7 +53,7 @@ public class SpaceOwls extends Application{
 
         SimuleCorp c = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
         c.setMass(10);
-        ss.addCorp(c1, c2, c);
+        ss.addCorp(c1, c2, c);*/
 
 
 
@@ -63,7 +64,7 @@ public class SpaceOwls extends Application{
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                update(ss.getDt()*1000);
+                update(ss.getDt());
                 render(stage);
             }
         };

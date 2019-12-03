@@ -1,5 +1,6 @@
 package fr.fireowls.spaceowls.system.corp;
 
+import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.utils.Location;
 
 import java.lang.reflect.InvocationTargetException;
@@ -22,8 +23,8 @@ public class CorpFactory {
 	 * @param vitY est la vitesse en Y du corp
 	 * @return le corp
 	 */
-	public static Corp createSimuleCorp(Location location,double vitX,double vitY){
-		return new SimuleCorp(location,vitX,vitY);
+	public static Corp createSimuleCorp(Location location,double vitX,double vitY, SpaceSystem ss){
+		return new SimuleCorp(location,vitX,vitY, ss);
 	}
 
 	/**

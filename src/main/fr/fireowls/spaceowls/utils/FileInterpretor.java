@@ -24,6 +24,7 @@ public class FileInterpretor {
 	private FileReader fr;
 	private ArrayList<String> content;
 	private ArrayList<Corp> corpCreated;
+	private SpaceSystem ss;
 	
 	public static void main(String[] args) {
 		FileInterpretor fi = new FileInterpretor("05_PlanèteSurOrbite.astro");
@@ -107,74 +108,78 @@ public class FileInterpretor {
 		dt = Double.parseDouble(this.content.get(idx).split(" ")[2].split("=")[1]);
 		fa = Double.parseDouble(this.content.get(idx).split(" ")[3].split("=")[1]);
 		rayon = Double.parseDouble(this.content.get(idx).split(" ")[4].split("=")[1]);
-		
-		return new SpaceSystem(g,dt,fa,rayon,createCorp(idx+1));
+		this.ss = new SpaceSystem(g,dt,fa,rayon);
+		this.ss.setCorps(createCorp(idx+1));
+		return ss;
 	}
 	
 	public ArrayList<Corp> createCorp(int idx) {
 		ArrayList<Corp> elements = new ArrayList<>();
 		for(int i = idx; i  < this.content.size(); i++) {
-			String name = this.content.get(i).split(":")[0];
-			String line = this.content.get(i).split(":")[1].substring(1);
-			line = line.substring(0,line.length()-1);
-			double mass = Double.parseDouble(line.split(" ")[1].split("=")[1]);
+			if(this.content.get(i).split(":").length == 2) {
+				String name = this.content.get(i).split(":")[0];
+				String line = this.content.get(i).split(":")[1].substring(1);
+				line = line.substring(0,line.length()-1);
+				double mass = Double.parseDouble(line.split(" ")[1].split("=")[1]);
 
-			CorpType type = getCorpType(line);
-			Corp c = null;
-			int posX = 0;
-			int posY = 0;
-			Location location = null;
-			double vitX = 0;
-			double vitY = 0;
-			switch (type){
-				case STATIC:
-					posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
-					posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
-					location = new Location(posX,posY);
-					c = CorpFactory.createStaticCorp(location);
-					break;
-				case SIMULE:
-					posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
-					posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
-					location = new Location(posX,posY);
-					vitX = Double.parseDouble(line.split(" ")[4].split("=")[1]);
-					vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
-					c = CorpFactory.createSimuleCorp(location,vitX,vitY);
-					break;
-				case VAISSEAU:
-					posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
-					posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
-					location = new Location(posX,posY);
-					vitX = Double.parseDouble(line.split(" ")[4].split("=")[1]);
-					vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
-					double ppropul = Double.parseDouble(line.split(" ")[6].split("=")[1]);
-					double pretro = Double.parseDouble(line.split(" ")[7].split("=")[1]);
-					c = CorpFactory.createShipCorp(location,vitX,vitY,ppropul,pretro);
-					break;
-				case ELLIPSE:
-					posX = Integer.parseInt(line.split(" ")[4].split("=")[1]);
-					posY = Integer.parseInt(line.split(" ")[5].split("=")[1]);
-					location = new Location(posX,posY);
-					String name1 = line.split(" ")[2].split("=")[1];
-					String name2 = line.split(" ")[3].split("=")[1];
-					Corp c1 = null;
-					Corp c2 = null;
-					for(Corp corp:this.corpCreated){
-						if(corp.getName().equals(name1)){
-							c1 = corp;
-						}else if(corp.getName().equals(name2)) {
-							c2 = corp;
+				CorpType type = getCorpType(line);
+				Corp c = null;
+				int posX = 0;
+				int posY = 0;
+				Location location = null;
+				double vitX = 0;
+				double vitY = 0;
+				switch (type){
+					case STATIC:
+						posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
+						posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+						location = new Location(posX,posY);
+						c = CorpFactory.createStaticCorp(location);
+						break;
+					case SIMULE:
+						posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
+						posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+						location = new Location(posX,posY);
+						vitX = Double.parseDouble(line.split(" ")[4].split("=")[1]);
+						vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
+						c = CorpFactory.createSimuleCorp(location,vitX,vitY, ss);
+						break;
+					case VAISSEAU:
+						posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
+						posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+						location = new Location(posX,posY);
+						vitX = Double.parseDouble(line.split(" ")[4].split("=")[1]);
+						vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
+						double ppropul = Double.parseDouble(line.split(" ")[6].split("=")[1]);
+						double pretro = Double.parseDouble(line.split(" ")[7].split("=")[1]);
+						c = CorpFactory.createShipCorp(location,vitX,vitY,ppropul,pretro);
+						break;
+					case ELLIPSE:
+						posX = Integer.parseInt(line.split(" ")[4].split("=")[1]);
+						posY = Integer.parseInt(line.split(" ")[5].split("=")[1]);
+						location = new Location(posX,posY);
+						String name1 = line.split(" ")[2].split("=")[1];
+						String name2 = line.split(" ")[3].split("=")[1];
+						Corp c1 = null;
+						Corp c2 = null;
+						for(Corp corp:this.corpCreated){
+							if(corp.getName().equals(name1)){
+								c1 = corp;
+							}else if(corp.getName().equals(name2)) {
+								c2 = corp;
+							}
 						}
-					}
-					int periode = Integer.parseInt(line.split(" ")[6].split("=")[1]);
-					c = CorpFactory.createEllipseCorp(location,c1,c2,periode);
-					break;
+						int periode = Integer.parseInt(line.split(" ")[6].split("=")[1]);
+						c = CorpFactory.createEllipseCorp(location,c1,c2,periode);
+						break;
+				}
+				c.setMass(mass);
+				c.setName(name);
+				this.corpCreated.add(c);
+				elements.add(c);
+				System.out.println("Corp "+name+" created!");
 			}
-			c.setMass(mass);
-			c.setName(name);
-			this.corpCreated.add(c);
-			elements.add(c);
-			System.out.println("Corp "+name+" created!");
+			
 		}
 		return elements;
 	}
