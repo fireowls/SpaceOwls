@@ -52,4 +52,15 @@ public class CorpFactory {
 		return new EllipseCorp(location,c1,c2,periode);
 	}
 
+	/**
+	 * Créer un corp cercle
+	 * @param location est la location du corp
+	 * @param center est le corp autour duquel le corp va tourner
+	 * @param periode est la periode
+	 * @return le corp
+	 */
+	public static Corp createCircleCorp(Location location,Corp center,int periode){
+		return new CircleCorp(location,center,periode);
+	}
+
 }

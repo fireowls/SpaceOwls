@@ -27,7 +27,7 @@ public class FileInterpretor {
 	private SpaceSystem ss;
 	
 	public static void main(String[] args) {
-		FileInterpretor fi = new FileInterpretor("res/system/04_ExempleDuSujet.astro");
+		FileInterpretor fi = new FileInterpretor("res/system/06_DeuxPlanetesEtLuneSurOrbite.astro");
 		SpaceSystem ss = fi.ss;
 		System.out.println("g="+ss.getG()+" dt="+ss.getDt()+" fa="+ss.getFa()+" rayon="+ss.getRayon());
 		System.out.println("Liste des fr.fireowls.spaceowls.system.corp");
@@ -134,6 +134,7 @@ public class FileInterpretor {
 				Location location = null;
 				double vitX = 0;
 				double vitY = 0;
+				int periode = 0;
 				switch (type){
 					case STATIC:
 						posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
@@ -167,8 +168,17 @@ public class FileInterpretor {
 						String name2 = line.split(" ")[3].split("=")[1];
 						Corp c1 = getCreatedCorp(name1);
 						Corp c2 = getCreatedCorp(name2);
-						int periode = Integer.parseInt(line.split(" ")[6].split("=")[1]);
+						periode = Integer.parseInt(line.split(" ")[6].split("=")[1]);
 						c = CorpFactory.createEllipseCorp(location,c1,c2,periode);
+						break;
+					case CERCLE:
+						posX = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+						posY = Integer.parseInt(line.split(" ")[4].split("=")[1]);
+						location = new Location(posX,posY);
+						String name3 = line.split(" ")[2].split("=")[1];
+						Corp center = getCreatedCorp(name3);
+						periode = Integer.parseInt(line.split(" ")[5].split("=")[1]);
+						c = CorpFactory.createCircleCorp(location,center,periode);
 						break;
 				}
 				c.setMass(mass);
@@ -193,6 +203,7 @@ public class FileInterpretor {
 		else if(type.equals(CorpType.SIMULE.getName())) return CorpType.SIMULE;
 		else if(type.equals(CorpType.VAISSEAU.getName())) return CorpType.VAISSEAU;
 		else if(type.equals(CorpType.ELLIPSE.getName())) return CorpType.ELLIPSE;
+		else if(type.equals(CorpType.CERCLE.getName())) return CorpType.CERCLE;
 		return null;
 	}
 	

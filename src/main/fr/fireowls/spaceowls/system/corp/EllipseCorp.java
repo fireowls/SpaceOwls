@@ -15,8 +15,9 @@ public class EllipseCorp extends Corp {
 		this.c2 = c2;
 		this.periode = periode;		
 	}
-	
-	public EllipseCorp(Object[] objects) {
-		this(new Location((double)objects[0],(double)objects[1]),(Corp)objects[2],(Corp)objects[3],(int)objects[4]);
+
+	@Override
+	public String toString() {
+		return this.type.getName()+"["+location.toString()+",c1="+c1.getName()+",c2="+c2.getName()+",periode="+periode+"]";
 	}
 }
