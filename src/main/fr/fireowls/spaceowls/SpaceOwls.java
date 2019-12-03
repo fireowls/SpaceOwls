@@ -41,7 +41,7 @@ public class SpaceOwls extends Application{
 
         canvas = new Canvas(1500,1000);
 
-        FileInterpretor fi = new FileInterpretor("02_PlanèteTourne.astro");
+        FileInterpretor fi = new FileInterpretor("03_DeuxPlanètes.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
 
