@@ -36,8 +36,8 @@ public class CorpFactory {
 	 * @param pretro est la force de propulsion retro
 	 * @return le corp
 	 */
-	public static Corp createShipCorp(Location location,double vitX,double vitY,double pprincipal,double pretro){
-		return new ShipCorp(location,vitX,vitY,pprincipal,pretro);
+	public static Corp createShipCorp(Location location,double vitX,double vitY, SpaceSystem ss, double pprincipal,double pretro){
+		return new ShipCorp(location,vitX,vitY, ss, pprincipal,pretro);
 	}
 
 	/**

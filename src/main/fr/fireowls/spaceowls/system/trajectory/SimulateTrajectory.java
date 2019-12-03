@@ -17,8 +17,8 @@ public class SimulateTrajectory extends Trajectory {
 	 */
 	private SpaceSystem ss;
 	private SimuleCorp corp;
-	private double vitX = 1;
-	private double vitY = 1;
+	public double vitX = 1;
+	public double vitY = 1;
 	
 	/**
 	 * constructeur
