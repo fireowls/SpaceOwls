@@ -15,6 +15,7 @@ import fr.fireowls.spaceowls.system.corp.CorpType;
 /**
  * Class qui permet l'interpretaion de fichier systeme (.astro) pour créer le systeme et les objets preciser dans le ficher
  * @author bankaerb
+ * @version 1.7.1
  *
  */
 public class FileInterpretor {
@@ -22,9 +23,10 @@ public class FileInterpretor {
 	private BufferedReader br;
 	private FileReader fr;
 	private ArrayList<String> content;
+	private ArrayList<Corp> corpCreated;
 	
 	public static void main(String[] args) {
-		FileInterpretor fi = new FileInterpretor("04_ExempleDuSujet.astro");
+		FileInterpretor fi = new FileInterpretor("05_PlanèteSurOrbite.astro");
 		System.out.println("recup du contenu");
 		fi.getContent();
 		System.out.println("contenu recup | Creation du systeme");
@@ -53,6 +55,7 @@ public class FileInterpretor {
 			System.out.println("Fichier "+fileName+" trouvé.");
 		}
 		this.content = new ArrayList<String>();
+		this.corpCreated = new ArrayList<>();
 	}
 
 	/**
@@ -114,22 +117,86 @@ public class FileInterpretor {
 			String name = this.content.get(i).split(":")[0];
 			String line = this.content.get(i).split(":")[1].substring(1);
 			line = line.substring(0,line.length()-1);
-			double[] args = getAllArguments(line);
 			double mass = Double.parseDouble(line.split(" ")[1].split("=")[1]);
-			Corp c = CorpFactory.createCorp(name, args);
+
+			CorpType type = getCorpType(line);
+			Corp c = null;
+			int posX = 0;
+			int posY = 0;
+			Location location = null;
+			double vitX = 0;
+			double vitY = 0;
+			switch (type){
+				case STATIC:
+					posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
+					posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+					location = new Location(posX,posY);
+					c = CorpFactory.createStaticCorp(location);
+					break;
+				case SIMULE:
+					posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
+					posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+					location = new Location(posX,posY);
+					vitX = Double.parseDouble(line.split(" ")[4].split("=")[1]);
+					vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
+					c = CorpFactory.createSimuleCorp(location,vitX,vitY);
+					break;
+				case VAISSEAU:
+					posX = Integer.parseInt(line.split(" ")[2].split("=")[1]);
+					posY = Integer.parseInt(line.split(" ")[3].split("=")[1]);
+					location = new Location(posX,posY);
+					vitX = Double.parseDouble(line.split(" ")[4].split("=")[1]);
+					vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
+					double ppropul = Double.parseDouble(line.split(" ")[6].split("=")[1]);
+					double pretro = Double.parseDouble(line.split(" ")[7].split("=")[1]);
+					c = CorpFactory.createShipCorp(location,vitX,vitY,ppropul,pretro);
+					break;
+				case ELLIPSE:
+					posX = Integer.parseInt(line.split(" ")[4].split("=")[1]);
+					posY = Integer.parseInt(line.split(" ")[5].split("=")[1]);
+					location = new Location(posX,posY);
+					String name1 = line.split(" ")[2].split("=")[1];
+					String name2 = line.split(" ")[3].split("=")[1];
+					Corp c1 = null;
+					Corp c2 = null;
+					for(Corp corp:this.corpCreated){
+						if(corp.getName().equals(name1)){
+							c1 = corp;
+						}else if(corp.getName().equals(name2)) {
+							c2 = corp;
+						}
+					}
+					int periode = Integer.parseInt(line.split(" ")[6].split("=")[1]);
+					c = CorpFactory.createEllipseCorp(location,c1,c2,periode);
+					break;
+			}
 			c.setMass(mass);
+			c.setName(name);
+			this.corpCreated.add(c);
 			elements.add(c);
+			System.out.println("Corp "+name+" created!");
 		}
 		return elements;
-	} 
+	}
 	
-	public double[] getAllArguments(String s) {
-		int nbOfArgs = s.split(" ").length;
-		double[] args = new double[nbOfArgs-2];
-		for(int i = 2; i < nbOfArgs; i++) {
-			args[i-2] = Double.parseDouble(s.split(" ")[i].split("=")[1]);
+	/**
+	 * Methode qui retour le type de corp de la ligne passé en parametre
+	 * @param line est la ligne du corp
+	 * @return le type du corp
+	 */
+	public CorpType getCorpType(String line) {
+		String type = line.split(" ")[0];
+		if(type.equals(CorpType.STATIC.getName())) return CorpType.STATIC;
+		else if(type.equals(CorpType.SIMULE.getName())) return CorpType.SIMULE;
+		else if(type.equals(CorpType.VAISSEAU.getName())) return CorpType.VAISSEAU;
+		else if(type.equals(CorpType.ELLIPSE.getName())) return CorpType.ELLIPSE;
+		return null;
+	}
+	
+	public Corp getCreatedCorp(String name) {
+		for(Corp c:this.corpCreated) {
+			if(c.getName().equals(name)) return c;
 		}
-		return args;
-		
+		return null;
 	}
 }

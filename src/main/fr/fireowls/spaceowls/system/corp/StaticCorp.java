@@ -10,6 +10,10 @@ public class StaticCorp extends Corp {
         this.setTrajectory(new StaticTrajectory());
     }
     
+    public StaticCorp(Object[] ds) {
+    	this(new Location((double)ds[0],(double)ds[1]));
+    }
+    
     public String toString() {
 		return this.type.getName()+"["+this.mass+","+this.location.toString()+"]";
 	}
