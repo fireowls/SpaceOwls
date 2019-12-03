@@ -53,7 +53,7 @@ public class SimulateTrajectory extends Trajectory {
 	public void applicateStrength(Corp autre) {
 		double distance = Math.sqrt(Math.pow((corp.getLocation().getX() - autre.getLocation().getX()), 2) + Math.pow((corp.getLocation().getY() - autre.getLocation().getY()), 2));
 		double f = SpaceSystem.g * (corp.getMass()) * autre.getMass() / (Math.pow(distance, 2));
-		double a = (f / corp.getMass()) * SpaceSystem.fa;
+		double a = (f / corp.getMass()) * SpaceSystem.dt;
 		
 		double dirX = (autre.getLocation().getX() - corp.getLocation().getX()) / distance;
 		double dirY = (autre.getLocation().getY() - corp.getLocation().getY()) / distance;
