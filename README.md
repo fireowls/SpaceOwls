@@ -19,6 +19,9 @@ Ce projet consiste à réaliser un simulateur de vol spatial au plus proche du r
 * Affichage des trajectoires
 * Saut dans le temps
 
+### Attention
+
+Les fichiers avec un accent dans le nom ne sont pas supportés (problème d'encodage)
 
 ### Liens
 
@@ -26,5 +29,4 @@ trello :
 https://trello.com/b/pqs3Mrh5/spaceowls
 UML :
 https://www.draw.io/#G1MBM_PvoEzuywv4roDVxr1Vp_zEmpJ8fv
-# SpaceOwls
-# SpaceOwls
+

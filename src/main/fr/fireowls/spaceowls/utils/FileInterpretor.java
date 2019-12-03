@@ -27,12 +27,8 @@ public class FileInterpretor {
 	private SpaceSystem ss;
 	
 	public static void main(String[] args) {
-		FileInterpretor fi = new FileInterpretor("05_PlanèteSurOrbite.astro");
-		System.out.println("recup du contenu");
-		fi.getContent();
-		System.out.println("contenu recup | Creation du systeme");
-		SpaceSystem ss = fi.createSystem();
-		System.out.println("Systeme crée");
+		FileInterpretor fi = new FileInterpretor("res/system/04_ExempleDuSujet.astro");
+		SpaceSystem ss = fi.ss;
 		System.out.println("g="+ss.getG()+" dt="+ss.getDt()+" fa="+ss.getFa()+" rayon="+ss.getRayon());
 		System.out.println("Liste des fr.fireowls.spaceowls.system.corp");
 		for(Corp c:ss.getCorps()) {
@@ -48,27 +44,37 @@ public class FileInterpretor {
 	 */
 	public FileInterpretor(String fileName) {
 		try {
-			this.fr = new FileReader("res/system/"+fileName);
+			this.fr = new FileReader(fileName);
 			this.br = new BufferedReader(this.fr);
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 			return;
 		}finally {
 			System.out.println("Fichier "+fileName+" trouvé.");
+			this.content = new ArrayList<>();
+			this.corpCreated = new ArrayList<>();
+			createSystem();
+			try {
+				this.fr.close();
+				this.br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 		}
-		this.content = new ArrayList<String>();
-		this.corpCreated = new ArrayList<>();
+
 	}
 
 	/**
 	 * Recupere le contenu du fichier
 	 * @return une liste avec une case par ligne du fichier
 	 */
-	public ArrayList<String> getContent() {
+	public void getContent() {
 		String in = null;
 		try {
 			in = this.br.readLine();
 		} catch (IOException e) {
-			return null;
+			return ;
 		}
 		while(in != null) {
 			if(in == "") {
@@ -80,10 +86,9 @@ public class FileInterpretor {
 			try {
 				in = this.br.readLine();
 			} catch (IOException e) {
-				return null;
+				return;
 			}
 		}
-		return content;
 	}
 
 	/**
@@ -160,15 +165,8 @@ public class FileInterpretor {
 						location = new Location(posX,posY);
 						String name1 = line.split(" ")[2].split("=")[1];
 						String name2 = line.split(" ")[3].split("=")[1];
-						Corp c1 = null;
-						Corp c2 = null;
-						for(Corp corp:this.corpCreated){
-							if(corp.getName().equals(name1)){
-								c1 = corp;
-							}else if(corp.getName().equals(name2)) {
-								c2 = corp;
-							}
-						}
+						Corp c1 = getCreatedCorp(name1);
+						Corp c2 = getCreatedCorp(name2);
 						int periode = Integer.parseInt(line.split(" ")[6].split("=")[1]);
 						c = CorpFactory.createEllipseCorp(location,c1,c2,periode);
 						break;
