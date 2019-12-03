@@ -51,7 +51,7 @@ public class SpaceOwls extends Application{
         c2.setMass(400);
 
         SimuleCorp c = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
-        c.setMass(1);
+        c.setMass(10);
         ss.addCorp(c1, c2, c);
 
 
