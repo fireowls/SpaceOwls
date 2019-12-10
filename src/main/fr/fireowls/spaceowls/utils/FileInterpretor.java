@@ -158,7 +158,7 @@ public class FileInterpretor {
 						vitY = Double.parseDouble(line.split(" ")[5].split("=")[1]);
 						double ppropul = Double.parseDouble(line.split(" ")[6].split("=")[1]);
 						double pretro = Double.parseDouble(line.split(" ")[7].split("=")[1]);
-						c = CorpFactory.createShipCorp(location,vitX,vitY,ppropul,pretro);
+						c = CorpFactory.createShipCorp(location,vitX,vitY,ss,ppropul,pretro);
 						break;
 					case ELLIPSE:
 						posX = Integer.parseInt(line.split(" ")[4].split("=")[1]);

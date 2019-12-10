@@ -4,6 +4,7 @@ package fr.fireowls.spaceowls.system.trajectory;
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.system.corp.SimuleCorp;
+import fr.fireowls.spaceowls.utils.Location;
 
 /**
  * Class qui décrit les méthodes utiles pour une trajectoire simulée
@@ -17,8 +18,8 @@ public class SimulateTrajectory extends Trajectory {
 	 */
 	private SpaceSystem ss;
 	private SimuleCorp corp;
-	private double vitX = 1;
-	private double vitY = 1;
+	public double vitX = 1;
+	public double vitY = 1;
 	
 	/**
 	 * constructeur
@@ -44,6 +45,12 @@ public class SimulateTrajectory extends Trajectory {
 				corp.getLocation().getX() + (delta * vitX),
 				corp.getLocation().getY() + (delta * vitY)
 		);
+		if(previousLocation.size() < 2000) {
+			previousLocation.add(new Location(location.getX()+20, location.getY()+20));
+		}else {
+			previousLocation.remove(0);
+			previousLocation.add(new Location(location.getX()+20, location.getY()+20));
+		}
 	}
 	
 	/**
