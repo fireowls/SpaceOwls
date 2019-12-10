@@ -17,6 +17,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class SpaceOwls extends Application{
@@ -45,6 +46,7 @@ public class SpaceOwls extends Application{
         FileInterpretor fi = new FileInterpretor("03_DeuxPlanètes.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
+        ss.create();
         
         /*ShipCorp c = new ShipCorp(new Location(0, 0), 0, 0, ss, 0.1, 0.1);
         c.setMass(0);
@@ -59,7 +61,7 @@ public class SpaceOwls extends Application{
         c.setMass(10);
         ss.addCorp(c1, c2, c);*/
 
-
+        
 
         VBox vBox = new VBox(canvas);
         /*vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
@@ -81,7 +83,8 @@ public class SpaceOwls extends Application{
 
 
     private void render(Stage stage) {
-        canvas.getGraphicsContext2D().clearRect(0,0,1500,1000);
+    	canvas.getGraphicsContext2D().setFill(Color.BLACK);
+    	canvas.getGraphicsContext2D().fillRect(0, 0, 1500, 1000);
         ss.render(canvas);
     }
 

@@ -1,5 +1,8 @@
 package fr.fireowls.spaceowls.system.trajectory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.fireowls.spaceowls.SpaceOwls;
 import fr.fireowls.spaceowls.engine.Engine;
 import fr.fireowls.spaceowls.screen.OwlPainter;
@@ -8,6 +11,7 @@ import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.Vector;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 /**
  * Class mère de toutes les trajectoires
@@ -20,6 +24,8 @@ public class Trajectory implements Updatable {
 	 * type de trajectoire
 	 */
 	protected TrajectoryType type;
+	
+	protected List<Location> previousLocation;
 	
 	/**
 	 * position du corp
@@ -69,6 +75,8 @@ public class Trajectory implements Updatable {
 		yCalculator = null;
 		timer = 0;
 		startTrajectory = 0;
+		
+		previousLocation = new ArrayList<>();
 
 		//engine = SpaceOwls.engine;
 	}
@@ -85,17 +93,29 @@ public class Trajectory implements Updatable {
 
 	@Override
 	public void update(double dt) {
-		
-		//timer = engine.getTimer() - startTrajectory;
-		System.out.println(location + " " + xCalculator.handle(timer) + " " + yCalculator.handle(timer));
 		location.move(
 				xCalculator.handle(dt),
 				yCalculator.handle(dt)
 		);
+		if(previousLocation.size() < 2000) {
+			previousLocation.add(new Location(location.getX()+20, location.getY()+20));
+		} else {
+			previousLocation.remove(0);
+			previousLocation.add(new Location(location.getX()+20, location.getY()+20));
+		}
+		
 	}
 
 	@Override
-	public void render(Canvas canvas) {}
+	public void render(Canvas canvas) {
+		canvas.getGraphicsContext2D().setFill(Color.WHITE);
+		canvas.getGraphicsContext2D().setGlobalAlpha((float)(0.2));
+		for(int i = 0; i < previousLocation.size(); i++) {
+			Location l = previousLocation.get(i);
+			canvas.getGraphicsContext2D().fillRect(l.getX()+200, l.getY()+200, 1, 1);
+		}
+		canvas.getGraphicsContext2D().setGlobalAlpha(1);
+	}
 
 	@Override
 	public void dispose() {}
