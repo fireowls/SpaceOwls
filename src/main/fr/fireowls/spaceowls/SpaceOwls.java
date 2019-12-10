@@ -1,6 +1,7 @@
 package fr.fireowls.spaceowls;
 
 import fr.fireowls.spaceowls.engine.Engine;
+import fr.fireowls.spaceowls.hud.BoardPanel;
 import fr.fireowls.spaceowls.screen.ScreenContext;
 import fr.fireowls.spaceowls.screen.ScreenManager;
 import fr.fireowls.spaceowls.screen.scene.Scenes;
@@ -41,7 +42,7 @@ public class SpaceOwls extends Application{
 
         canvas = new Canvas(1500,1000);
 
-        FileInterpretor fi = new FileInterpretor("03_DeuxPlanètes.astro");
+        FileInterpretor fi = new FileInterpretor("01_CorpsTombeSurSoleil.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
 
@@ -58,6 +59,8 @@ public class SpaceOwls extends Application{
 
 
         VBox vBox = new VBox(canvas);
+        BoardPanel bp = new BoardPanel(ss);
+        vBox.getChildren().add(bp.getHboxMain());
         stage.setScene(new Scene(vBox));
         stage.setTitle(APP_NAME);
         stage.show();
