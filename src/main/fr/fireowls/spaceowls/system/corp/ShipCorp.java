@@ -6,6 +6,7 @@ import fr.fireowls.spaceowls.utils.Location;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 public class ShipCorp extends Corp{
 
@@ -20,10 +21,8 @@ public class ShipCorp extends Corp{
 	}
 	
 	public void keyPressed(KeyCode e) {
-		System.out.println(e);
 		if (e == KeyCode.LEFT) {
 	    	((ShipTrajectory) trajectory).vitX -= pretro;
-	    	System.out.println("truc");
 	    }
 	    if (e == KeyCode.RIGHT) {
 	    	((ShipTrajectory) trajectory).vitX += pretro;
@@ -38,6 +37,8 @@ public class ShipCorp extends Corp{
 	
 	@Override
 	public void render(Canvas canvas) {
-		canvas.getGraphicsContext2D().fillRect(location.getX(), location.getY(), 50, 50);
+		trajectory.render(canvas);
+		canvas.getGraphicsContext2D().setFill(Color.BLUE);
+		canvas.getGraphicsContext2D().fillRect(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2, 50, 50);
 	}
 }

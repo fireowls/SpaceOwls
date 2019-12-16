@@ -58,7 +58,7 @@ public class Corp implements Updatable {
 		//if (trajectory != null) trajectory.render(painter);
 		trajectory.render(canvas);
 		canvas.getGraphicsContext2D().setFill(Color.YELLOW);
-		canvas.getGraphicsContext2D().fillOval(location.getX()+200, location.getY()+200, 50, 50);
+		canvas.getGraphicsContext2D().fillOval(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2, 50, 50);
 	}
 
 	@Override

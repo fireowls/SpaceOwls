@@ -41,32 +41,31 @@ public class SpaceOwls extends Application{
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
 
-        canvas = new Canvas(1500,1000);
-
-        FileInterpretor fi = new FileInterpretor("03_DeuxPlanètes.astro");
-        //ss = new SpaceSystem(0.01, 4, 500, 500);
-        ss = fi.createSystem();
+        //FileInterpretor fi = new FileInterpretor("03_DeuxPlanetes.astro");
+        ss = new SpaceSystem(0.01, 4, 500, 500);
+        //ss = fi.createSystem();
         ss.create();
         
-        /*ShipCorp c = new ShipCorp(new Location(0, 0), 0, 0, ss, 0.1, 0.1);
-        c.setMass(0);
-        ss.addCorp(c);*/
-        /*StaticCorp c1 = new StaticCorp(new Location(200, 200));
+        ShipCorp c = new ShipCorp(new Location(10, 10), 0, 0, ss, 0.1, 0.1);
+        c.setMass(10);
+        ss.addCorp(c);
+        StaticCorp c1 = new StaticCorp(new Location(200, 200));
         c1.setMass(40);
 
         StaticCorp c2 = new StaticCorp(new Location(1000, 500));
         c2.setMass(400);
 
-        SimuleCorp c = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
-        c.setMass(10);
-        ss.addCorp(c1, c2, c);*/
+        SimuleCorp c3 = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
+        c3.setMass(10);
+        ss.addCorp(c, c1, c2, c3);
 
-        
+
+        canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2);
 
         VBox vBox = new VBox(canvas);
-        /*vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-        	((ShipCorp)(ss.getCorps().get(ss.getCorps().size()-1))).keyPressed(e.getCode());
-        });*/
+        vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+        	((ShipCorp)(ss.getCorps().get(0))).keyPressed(e.getCode());
+        });
         stage.setScene(new Scene(vBox));
         stage.setTitle(APP_NAME);
         stage.show();

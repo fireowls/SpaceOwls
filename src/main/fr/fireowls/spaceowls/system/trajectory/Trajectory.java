@@ -98,10 +98,10 @@ public class Trajectory implements Updatable {
 				yCalculator.handle(dt)
 		);
 		if(previousLocation.size() < 2000) {
-			previousLocation.add(new Location(location.getX()+20, location.getY()+20));
+			previousLocation.add(new Location(location.getX(), location.getY()));
 		} else {
 			previousLocation.remove(0);
-			previousLocation.add(new Location(location.getX()+20, location.getY()+20));
+			previousLocation.add(new Location(location.getX(), location.getY()));
 		}
 		
 	}
@@ -112,7 +112,7 @@ public class Trajectory implements Updatable {
 		canvas.getGraphicsContext2D().setGlobalAlpha((float)(0.2));
 		for(int i = 0; i < previousLocation.size(); i++) {
 			Location l = previousLocation.get(i);
-			canvas.getGraphicsContext2D().fillRect(l.getX()+200, l.getY()+200, 1, 1);
+			canvas.getGraphicsContext2D().fillRect(l.getX()+canvas.getWidth()/2, l.getY()+canvas.getHeight()/2, 1, 1);
 		}
 		canvas.getGraphicsContext2D().setGlobalAlpha(1);
 	}
