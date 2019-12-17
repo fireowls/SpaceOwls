@@ -1,5 +1,6 @@
 package fr.fireowls.spaceowls;
 
+import fr.fireowls.spaceowls.math.CorpSize;
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.system.corp.ShipCorp;
@@ -40,7 +41,16 @@ public class SpaceOwls extends Application{
         FileInterpretor fi = new FileInterpretor("res/system/04_ExempleDuSujet.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
+
+        CorpSize corpSize = new CorpSize(ss.getCorps());
+        for(Corp c:ss.getCorps()){
+            c.setHeight(corpSize.getCorpSize(c));
+            c.setWidth(corpSize.getCorpSize(c));
+        }
+
         ss.create();
+
+
 
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2);
 
