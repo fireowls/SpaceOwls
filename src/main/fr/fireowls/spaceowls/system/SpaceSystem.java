@@ -6,6 +6,8 @@ import java.util.List;
 
 import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.system.corp.Corp;
+import fr.fireowls.spaceowls.system.corp.CorpType;
+import fr.fireowls.spaceowls.system.corp.ShipCorp;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.HitBoxManager;
 import javafx.scene.canvas.Canvas;
@@ -168,6 +170,15 @@ public class SpaceSystem implements Updatable{
 			c.dispose();
 		}
 		hitboxManager.dispose();
+	}
+
+	public ShipCorp getShip(){
+		for(Corp c:corps){
+			if(c.getType().equals(CorpType.VAISSEAU)){
+				return (ShipCorp) c;
+			}
+		}
+		return null;
 	}
 
 	public HitBoxManager getHitBoxManager() {
