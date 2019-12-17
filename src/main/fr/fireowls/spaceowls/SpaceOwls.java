@@ -41,26 +41,22 @@ public class SpaceOwls extends Application{
     @Override
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
-
-<<<<<<< HEAD
         canvas = new Canvas(1500,1000);
 
-        FileInterpretor fi = new FileInterpretor("01_CorpsTombeSurSoleil.astro");
+        //FileInterpretor fi = new FileInterpretor("res/system/01_CorpsTombeSurSoleil.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
-        ss = fi.createSystem();
-
-        /*StaticCorp c1 = new StaticCorp(new Location(200, 200));
-=======
-        //FileInterpretor fi = new FileInterpretor("03_DeuxPlanetes.astro");
-        ss = new SpaceSystem(0.01, 4, 500, 500);
         //ss = fi.createSystem();
+
+        //StaticCorp c1 = new StaticCorp(new Location(200, 200));
+        FileInterpretor fi = new FileInterpretor("res/system/03_DeuxPlanetes.astro");
+        /*ss = new SpaceSystem(0.01, 4, 500, 500);
+        ss = fi.createSystem();
         ss.create();
         
         ShipCorp c = new ShipCorp(new Location(10, 10), 0, 0, ss, 0.1, 0.1);
         c.setMass(10);
         ss.addCorp(c);
         StaticCorp c1 = new StaticCorp(new Location(200, 200));
->>>>>>> 1248c2d368b8f885735d65fa12cc1ae6809cfe4d
         c1.setMass(40);
 
         StaticCorp c2 = new StaticCorp(new Location(1000, 500));
@@ -68,20 +64,17 @@ public class SpaceOwls extends Application{
 
         SimuleCorp c3 = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
         c3.setMass(10);
-        ss.addCorp(c, c1, c2, c3);
+        ss.addCorp(c, c1, c2, c3);*/
 
 
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2);
 
         VBox vBox = new VBox(canvas);
-<<<<<<< HEAD
-        BoardPanel bp = new BoardPanel(ss);
-        vBox.getChildren().add(bp.getHboxMain());
-=======
+        //BoardPanel bp = new BoardPanel(ss);
+        //vBox.getChildren().add(bp.getHboxMain());
         vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
         	((ShipCorp)(ss.getCorps().get(0))).keyPressed(e.getCode());
         });
->>>>>>> 1248c2d368b8f885735d65fa12cc1ae6809cfe4d
         stage.setScene(new Scene(vBox));
         stage.setTitle(APP_NAME);
         stage.show();

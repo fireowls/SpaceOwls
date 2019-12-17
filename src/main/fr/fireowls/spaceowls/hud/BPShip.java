@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 public class BPShip {
 	
 	public static ImageView getShipView() {
-		Image spaceShipImage = new Image("./../../res/board_panel/space_ship.jpeg");
+		Image spaceShipImage = new Image("res/board_panel/space_ship.jpg");
 		ImageView spaceShipImageView = new ImageView();
 		spaceShipImageView.setImage(spaceShipImage);
 		return spaceShipImageView;

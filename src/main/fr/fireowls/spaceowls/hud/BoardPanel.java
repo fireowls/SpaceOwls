@@ -18,7 +18,7 @@ public class BoardPanel {
 	}
 
 	private HBox createBoardPanelWithShip() {
-		return new HBox(BPShip.getShipView(), BPShip.getShipInfo(ss), BPCore.getCoreVBox(ss), BPCore.getDetail());
+		return new HBox(BPShip.getShipInfo(ss), BPCore.getCoreVBox(ss), BPCore.getDetail());
 	}
 
 }
