@@ -2,6 +2,7 @@ package fr.fireowls.spaceowls.system.corp;
 
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.trajectory.ShipTrajectory;
+import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
@@ -19,7 +20,7 @@ public class ShipCorp extends Corp{
 		this.pretro = pretro;
 		this.trajectory = new ShipTrajectory(ss, this, vitX, vitY);
 	}
-	
+
 	public void keyPressed(KeyCode e) {
 		if (e == KeyCode.LEFT) {
 	    	((ShipTrajectory) trajectory).vitX -= pretro;
@@ -40,5 +41,13 @@ public class ShipCorp extends Corp{
 		trajectory.render(canvas);
 		canvas.getGraphicsContext2D().setFill(Color.BLUE);
 		canvas.getGraphicsContext2D().fillRect(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2, 50, 50);
+	}
+
+	public double getPprincipal() {
+		return pprincipal;
+	}
+
+	public double getPretro() {
+		return pretro;
 	}
 }

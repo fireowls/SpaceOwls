@@ -57,4 +57,12 @@ public class ShipTrajectory extends Trajectory{
 		vitX = ((float) (vitX + dirX * a));
 		vitY = ((float) (vitY + dirY * a));
 	}
+
+	public double getVitX() {
+		return vitX;
+	}
+
+	public double getVitY() {
+		return vitY;
+	}
 }
