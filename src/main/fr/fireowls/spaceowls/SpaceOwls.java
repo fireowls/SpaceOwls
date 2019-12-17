@@ -15,8 +15,10 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class SpaceOwls extends Application{
@@ -40,6 +42,7 @@ public class SpaceOwls extends Application{
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
 
+<<<<<<< HEAD
         canvas = new Canvas(1500,1000);
 
         FileInterpretor fi = new FileInterpretor("01_CorpsTombeSurSoleil.astro");
@@ -47,26 +50,45 @@ public class SpaceOwls extends Application{
         ss = fi.createSystem();
 
         /*StaticCorp c1 = new StaticCorp(new Location(200, 200));
+=======
+        //FileInterpretor fi = new FileInterpretor("03_DeuxPlanetes.astro");
+        ss = new SpaceSystem(0.01, 4, 500, 500);
+        //ss = fi.createSystem();
+        ss.create();
+        
+        ShipCorp c = new ShipCorp(new Location(10, 10), 0, 0, ss, 0.1, 0.1);
+        c.setMass(10);
+        ss.addCorp(c);
+        StaticCorp c1 = new StaticCorp(new Location(200, 200));
+>>>>>>> 1248c2d368b8f885735d65fa12cc1ae6809cfe4d
         c1.setMass(40);
 
         StaticCorp c2 = new StaticCorp(new Location(1000, 500));
         c2.setMass(400);
 
-        SimuleCorp c = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
-        c.setMass(10);
-        ss.addCorp(c1, c2, c);*/
+        SimuleCorp c3 = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
+        c3.setMass(10);
+        ss.addCorp(c, c1, c2, c3);
 
 
+        canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2);
 
         VBox vBox = new VBox(canvas);
+<<<<<<< HEAD
         BoardPanel bp = new BoardPanel(ss);
         vBox.getChildren().add(bp.getHboxMain());
+=======
+        vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+        	((ShipCorp)(ss.getCorps().get(0))).keyPressed(e.getCode());
+        });
+>>>>>>> 1248c2d368b8f885735d65fa12cc1ae6809cfe4d
         stage.setScene(new Scene(vBox));
         stage.setTitle(APP_NAME);
         stage.show();
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+            	vBox.requestFocus();
                 update(ss.getDt());
                 render(stage);
             }
@@ -76,7 +98,8 @@ public class SpaceOwls extends Application{
 
 
     private void render(Stage stage) {
-        canvas.getGraphicsContext2D().clearRect(0,0,1500,1000);
+    	canvas.getGraphicsContext2D().setFill(Color.BLACK);
+    	canvas.getGraphicsContext2D().fillRect(0, 0, 1500, 1000);
         ss.render(canvas);
     }
 

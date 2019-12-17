@@ -6,6 +6,8 @@ import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.HitBox;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class Corp implements Updatable {
 
@@ -54,7 +56,9 @@ public class Corp implements Updatable {
 	public void render(Canvas canvas) {
 		//if (hitBox != null) hitBox.render(painter);
 		//if (trajectory != null) trajectory.render(painter);
-		canvas.getGraphicsContext2D().fillOval(location.getX()+200, location.getY()+200, 50, 50);
+		trajectory.render(canvas);
+		canvas.getGraphicsContext2D().setFill(Color.YELLOW);
+		canvas.getGraphicsContext2D().fillOval(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2, 50, 50);
 	}
 
 	@Override

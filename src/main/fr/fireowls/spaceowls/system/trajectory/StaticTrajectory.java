@@ -15,7 +15,5 @@ public class StaticTrajectory extends Trajectory {
     }
 
     @Override
-    public void update(double dt) {
-
-    }
+    public void update(double dt) {}
 }
