@@ -38,7 +38,7 @@ public class SimulateTrajectory extends Trajectory {
 		//timer = engine.getTimer() - startTrajectory;
 		for(Corp c : ss.getCorps()) {
 			if(!c.equals(corp)) {
-				applicateStrength(c);
+				applicateStrength2(c);
 			}
 		}
 		corp.getLocation().move(
@@ -67,5 +67,20 @@ public class SimulateTrajectory extends Trajectory {
 		
 		vitX = ((float) (vitX + dirX * a));
 		vitY = ((float) (vitY + dirY * a));
+	}
+
+	public void applicateStrength2(Corp autre) {
+		for(int i = 0; i < 4; i++) {
+
+			double distance = Math.sqrt(Math.pow((corp.getLocation().getX() - autre.getLocation().getX()), 2) + Math.pow((corp.getLocation().getY() - autre.getLocation().getY()), 2));
+			double f = SpaceSystem.g * (corp.getMass()) * autre.getMass() / (Math.pow(distance, 2));
+			double a = (f / corp.getMass()) * SpaceSystem.dt / 4;
+
+			double dirX = (autre.getLocation().getX() - corp.getLocation().getX()) / distance;
+			double dirY = (autre.getLocation().getY() - corp.getLocation().getY()) / distance;
+
+			vitX = ((float) (vitX + dirX * a));
+			vitY = ((float) (vitY + dirY * a));
+		}
 	}
 }

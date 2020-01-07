@@ -4,7 +4,7 @@ public enum CorpType {
 
 	STATIC("Fixe", StaticCorp.class),
 	SIMULE("Simulé",SimuleCorp.class),
-	ELLIPSE("Ellipse", EllipseCorp.class),
+	ELLIPSE("Ellipse", CircleCorp.class),
 	CERCLE("Cercle",CircleCorp.class),
 	VAISSEAU("Vaisseau",ShipCorp.class);
 	

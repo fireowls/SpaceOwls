@@ -42,7 +42,7 @@ public class SpaceOwls extends Application{
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
 
-        FileInterpretor fi = new FileInterpretor("res/system/02_PlanèteTourne.astro");
+        FileInterpretor fi = new FileInterpretor("res/system/06_DeuxPlanetesEtLuneSurOrbite.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
 /*

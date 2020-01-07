@@ -17,30 +17,37 @@ public class ElipseTrajectory extends Trajectory {
     /**
      * le demi petit axe
      */
-    protected double radiusX;
-    
-    /**
-     * le demi grand axe
-     */
-    protected double radiusY;
+    protected double r;
+    private double perimeter;
+    private double vitX;
+    private double periode;
 
     /**
      * constructeur
      * @param center centre de l'élipse
-     * @param radiusX le demi petit axe
-     * @param radiusY le demi grand axe
+     * @param r le rayon
      */
-    public ElipseTrajectory(Location center, double radiusX, double radiusY) {
+    public ElipseTrajectory(Location center, double r, double periode) {
         super(TrajectoryType.ELLIPSE);
 
         this.center = center;
         this.location = center;
-        this.radiusX = radiusX;
-        this.radiusY = radiusY;
+        this.r = r;
+        this.periode = periode;
+    }
 
-        xCalculator = dt -> location.getX() + radiusX * Math.cos(dt);
-        yCalculator = dt -> location.getY() + radiusY * Math.sin(dt);
+    @Override
+    public void update(double dt) {
+        perimeter = 2 * Math.PI * r;
+        vitX =  2 * r / (periode/2);
+        location.move(location.getX()+vitX * dt, location.getY());
 
+        if(previousLocation.size() < 2000) {
+            previousLocation.add(new Location(location.getX(), location.getY()));
+        } else {
+            previousLocation.remove(0);
+            previousLocation.add(new Location(location.getX(), location.getY()));
+        }
     }
 
     /**
