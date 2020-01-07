@@ -42,7 +42,7 @@ public class SpaceOwls extends Application{
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
 
-        FileInterpretor fi = new FileInterpretor("res/system/04_ExempleDuSujet.astro");
+        FileInterpretor fi = new FileInterpretor("res/system/02_PlanèteTourne.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
 /*
@@ -67,8 +67,8 @@ public class SpaceOwls extends Application{
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2-300);
 
         VBox vBox = new VBox(canvas);
-        BoardPanel bp = new BoardPanel(ss);
-        vBox.getChildren().add(bp.getHboxMain());
+        //BoardPanel bp = new BoardPanel(ss);
+        //vBox.getChildren().add(bp.getHboxMain());
         vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
         	ss.getShip().keyPressed(e.getCode());
         });
