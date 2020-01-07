@@ -43,14 +43,13 @@ public class SpaceOwls extends Application{
         ss = fi.createSystem();
 
         CorpSize corpSize = new CorpSize(ss.getCorps());
+
         for(Corp c:ss.getCorps()){
             c.setHeight(corpSize.getCorpSize(c));
             c.setWidth(corpSize.getCorpSize(c));
         }
 
         ss.create();
-
-
 
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2);
 
