@@ -1,27 +1,19 @@
 package fr.fireowls.spaceowls;
 
-import fr.fireowls.spaceowls.engine.Engine;
-import fr.fireowls.spaceowls.hud.BoardPanel;
-import fr.fireowls.spaceowls.screen.ScreenContext;
-import fr.fireowls.spaceowls.screen.ScreenManager;
-import fr.fireowls.spaceowls.screen.scene.Scenes;
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.corp.*;
-import fr.fireowls.spaceowls.system.trajectory.ElipseTrajectory;
 import fr.fireowls.spaceowls.utils.FileInterpretor;
-import fr.fireowls.spaceowls.utils.Location;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class SpaceOwls extends Application{
+public class SpaceOwls extends Application {
 
     boolean running = true;
     public static final String APP_NAME = "SpaceOwls";
@@ -32,7 +24,8 @@ public class SpaceOwls extends Application{
 
     private SpaceSystem ss;
     private Canvas canvas;
-    private Corp corp;
+
+    double x, y = 0;
 
     public static void main(String...args) {
         launch(args);
@@ -43,32 +36,12 @@ public class SpaceOwls extends Application{
         SpaceOwls.stage = stage;
 
         FileInterpretor fi = new FileInterpretor("res/system/02_PlanèteTourne.astro");
-        //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
-/*
-        StaticCorp c1 = new StaticCorp(new Location(200, 200));
-        //FileInterpretor fi = new FileInterpretor("03_DeuxPlanetes.astro");
-        ss = new SpaceSystem(0.01, 4, 500, 500);
-        //ss = fi.createSystem();
-
-        ShipCorp c = new ShipCorp(new Location(-300, -300), 0, 0, ss, 0.1, 0.1);
-        c.setMass(10);
-        ss.addCorp(c);
-
-        StaticCorp c2 = new StaticCorp(new Location(1000, 500));
-        c2.setMass(400);
-
-        SimuleCorp c3 = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
-        c3.setMass(10);
-        ss.addCorp(c, c1, c2, c3);
-*/
         ss.create();
 
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2-300);
 
         VBox vBox = new VBox(canvas);
-        //BoardPanel bp = new BoardPanel(ss);
-        //vBox.getChildren().add(bp.getHboxMain());
         vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
         	ss.getShip().keyPressed(e.getCode());
         });
@@ -88,9 +61,15 @@ public class SpaceOwls extends Application{
 
 
     private void render(Stage stage) {
+        x += 1;
+        y += 1;
+        GraphicsContext context = canvas.getGraphicsContext2D();
+        context.save();
+        context.translate(x, y);
     	canvas.getGraphicsContext2D().setFill(Color.BLACK);
     	canvas.getGraphicsContext2D().fillRect(0, 0, 1500, 1000);
         ss.render(canvas);
+        context.restore();
     }
 
     private void update(double delta) {
