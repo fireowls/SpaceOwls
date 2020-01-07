@@ -5,18 +5,20 @@ import fr.fireowls.spaceowls.hud.BoardPanel;
 import fr.fireowls.spaceowls.screen.ScreenContext;
 import fr.fireowls.spaceowls.screen.ScreenManager;
 import fr.fireowls.spaceowls.screen.scene.Scenes;
+
+import fr.fireowls.spaceowls.math.CorpSize;
 import fr.fireowls.spaceowls.system.SpaceSystem;
-import fr.fireowls.spaceowls.system.corp.*;
-import fr.fireowls.spaceowls.system.trajectory.ElipseTrajectory;
+import fr.fireowls.spaceowls.system.corp.Corp;
+import fr.fireowls.spaceowls.system.corp.ShipCorp;
+import fr.fireowls.spaceowls.system.corp.SimuleCorp;
+import fr.fireowls.spaceowls.system.corp.StaticCorp;
 import fr.fireowls.spaceowls.utils.FileInterpretor;
 import fr.fireowls.spaceowls.utils.Location;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -42,36 +44,36 @@ public class SpaceOwls extends Application{
     public void start(Stage stage) {
         SpaceOwls.stage = stage;
 
+
         FileInterpretor fi = new FileInterpretor("res/system/02_PlanèteTourne.astro");
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
-/*
-        StaticCorp c1 = new StaticCorp(new Location(200, 200));
-        //FileInterpretor fi = new FileInterpretor("03_DeuxPlanetes.astro");
-        ss = new SpaceSystem(0.01, 4, 500, 500);
-        //ss = fi.createSystem();
 
-        ShipCorp c = new ShipCorp(new Location(-300, -300), 0, 0, ss, 0.1, 0.1);
-        c.setMass(10);
-        ss.addCorp(c);
 
-        StaticCorp c2 = new StaticCorp(new Location(1000, 500));
-        c2.setMass(400);
+        CorpSize corpSize = new CorpSize(ss.getCorps());
 
-        SimuleCorp c3 = new SimuleCorp(new Location(0,100), 0.025, 0, ss);
-        c3.setMass(10);
-        ss.addCorp(c, c1, c2, c3);
-*/
+        for(Corp c:ss.getCorps()){
+            c.setHeight(corpSize.getCorpSize(c));
+            c.setWidth(corpSize.getCorpSize(c));
+        }
         ss.create();
 
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2-300);
 
+        for(Corp c:ss.getCorps()){
+            c.setHeight(corpSize.getCorpSize(c));
+            c.setWidth(corpSize.getCorpSize(c));
+        }
+
+        ss.create();
+
+        canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2);
+
+
         VBox vBox = new VBox(canvas);
         //BoardPanel bp = new BoardPanel(ss);
         //vBox.getChildren().add(bp.getHboxMain());
-        vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-        	ss.getShip().keyPressed(e.getCode());
-        });
+
         stage.setScene(new Scene(vBox));
         stage.setTitle(APP_NAME);
         stage.show();
