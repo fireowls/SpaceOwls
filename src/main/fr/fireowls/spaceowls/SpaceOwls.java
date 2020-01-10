@@ -1,7 +1,7 @@
 package fr.fireowls.spaceowls;
 
+import fr.fireowls.spaceowls.screen.Camera;
 import fr.fireowls.spaceowls.system.SpaceSystem;
-import fr.fireowls.spaceowls.system.corp.*;
 import fr.fireowls.spaceowls.utils.FileInterpretor;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -19,13 +19,9 @@ public class SpaceOwls extends Application {
     public static final String APP_NAME = "SpaceOwls";
     public static final int TARGET_FPS = 60;
 
-    public static Stage stage;
-    private AnimationTimer timer;
-
     private SpaceSystem ss;
     private Canvas canvas;
-
-    double x, y = 0;
+    private Camera camera;
 
     public static void main(String...args) {
         launch(args);
@@ -33,25 +29,23 @@ public class SpaceOwls extends Application {
 
     @Override
     public void start(Stage stage) {
-        SpaceOwls.stage = stage;
 
         FileInterpretor fi = new FileInterpretor("res/system/02_PlanèteTourne.astro");
         ss = fi.createSystem();
         ss.create();
 
         canvas = new Canvas(ss.getRayon()*2,ss.getRayon()*2-300);
+        camera = new Camera();
 
         VBox vBox = new VBox(canvas);
-        vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-        	ss.getShip().keyPressed(e.getCode());
-        });
+        vBox.addEventHandler(KeyEvent.KEY_PRESSED, e -> ss.getShip().keyPressed(e.getCode()));
         stage.setScene(new Scene(vBox));
         stage.setTitle(APP_NAME);
         stage.show();
-        timer = new AnimationTimer() {
+        AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-            	vBox.requestFocus();
+                vBox.requestFocus();
                 update(ss.getDt());
                 render(stage);
             }
@@ -61,13 +55,12 @@ public class SpaceOwls extends Application {
 
 
     private void render(Stage stage) {
-        x += 1;
-        y += 1;
         GraphicsContext context = canvas.getGraphicsContext2D();
         context.save();
-        context.translate(x, y);
-    	canvas.getGraphicsContext2D().setFill(Color.BLACK);
-    	canvas.getGraphicsContext2D().fillRect(0, 0, 1500, 1000);
+        context.translate(camera.getLocation().getX(), camera.getLocation().getY());
+        context.scale(camera.getScale(), camera.getScale());
+        context.setFill(Color.BLACK);
+        context.fillRect(0, 0, 1500, 1000);
         ss.render(canvas);
         context.restore();
     }

@@ -1,13 +1,11 @@
 package fr.fireowls.spaceowls.system.corp;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.HitBox;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class Corp implements Updatable {
 
@@ -58,7 +56,7 @@ public class Corp implements Updatable {
 		//if (trajectory != null) trajectory.render(painter);
 		trajectory.render(canvas);
 		canvas.getGraphicsContext2D().setFill(Color.YELLOW);
-		canvas.getGraphicsContext2D().fillOval(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2, 50, 50);
+		canvas.getGraphicsContext2D().fillOval(location.getX()+ canvas.getWidth()/2, location.getY()+ canvas.getHeight()/2, 50, 50);
 	}
 
 	@Override

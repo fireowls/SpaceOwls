@@ -1,7 +1,5 @@
 package fr.fireowls.spaceowls.screen.scene;
 
-import fr.fireowls.spaceowls.SpaceOwls;
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.screen.Screen;
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.corp.Corp;

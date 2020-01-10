@@ -1,6 +1,5 @@
 package fr.fireowls.spaceowls.utils.hitbox;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.utils.Updatable;
 import javafx.scene.canvas.Canvas;
 
