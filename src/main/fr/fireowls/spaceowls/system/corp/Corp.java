@@ -48,14 +48,11 @@ public class Corp implements Updatable {
 
 	@Override
 	public void update(double delta) {
-		//if (hitBox != null) hitBox.update(delta);
 		if (trajectory != null) trajectory.update(delta);
 	}
 
 	@Override
 	public void render(Canvas canvas) {
-		//if (hitBox != null) hitBox.render(painter);
-		//if (trajectory != null) trajectory.render(painter);
 		System.out.println(trajectory + " - " + name);
 		trajectory.render(canvas);
 		canvas.getGraphicsContext2D().setFill(Color.YELLOW);

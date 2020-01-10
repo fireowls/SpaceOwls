@@ -1,11 +1,9 @@
 package fr.fireowls.spaceowls.screen.scene;
 
-import fr.fireowls.spaceowls.SpaceOwls;
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.screen.Screen;
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.corp.Corp;
-import fr.fireowls.spaceowls.system.trajectory.ElipseTrajectory;
+import fr.fireowls.spaceowls.system.trajectory.CircleTrajectory;
 import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.hitbox.CircleHitBox;
@@ -34,7 +32,7 @@ public class MainScreen extends Screen {
         HitBox box = new CircleHitBox(50, 50);
         c1.setHitBox(box);
 
-        trajectory1 = new ElipseTrajectory(c1.getLocation(), 1, 1);
+        trajectory1 = new CircleTrajectory(c1.getLocation(), 1, 1);
         c1.setTrajectory(trajectory1);
 
         ss.addCorp(c1);

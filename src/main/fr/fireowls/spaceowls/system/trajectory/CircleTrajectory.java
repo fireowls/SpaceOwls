@@ -7,7 +7,7 @@ import fr.fireowls.spaceowls.utils.Location;
  * @author defossea
  *
  */
-public class ElipseTrajectory extends Trajectory {
+public class CircleTrajectory extends Trajectory {
 
 	/**
 	 * centre de l'élipse
@@ -20,14 +20,16 @@ public class ElipseTrajectory extends Trajectory {
     protected double r;
     private double perimeter;
     private double vitX;
+    private double vitY;
     private double periode;
+    private boolean goRight = true;
 
     /**
      * constructeur
      * @param center centre de l'élipse
      * @param r le rayon
      */
-    public ElipseTrajectory(Location center, double r, double periode) {
+    public CircleTrajectory(Location center, double r, double periode) {
         super(TrajectoryType.ELLIPSE);
 
         this.center = center;
@@ -40,7 +42,17 @@ public class ElipseTrajectory extends Trajectory {
     public void update(double dt) {
         perimeter = 2 * Math.PI * r;
         vitX =  2 * r / (periode/2);
-        location.move(location.getX()+vitX * dt, location.getY());
+        if(location.getX() >= center.getX() + r) goRight = false;
+        if(location.getX() <= center.getX() - r) goRight = true;
+
+        double y = Math.sqrt(Math.pow(r,2)-Math.pow(Math.abs(location.getX()-center.getX()),2));
+
+        if(!goRight){
+            vitX = -vitX;
+            y = -y;
+        }
+
+        location.move(location.getX()+vitX * dt, y);
 
         if(previousLocation.size() < 2000) {
             previousLocation.add(new Location(location.getX(), location.getY()));

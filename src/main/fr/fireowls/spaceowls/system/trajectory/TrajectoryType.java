@@ -9,7 +9,7 @@ public enum TrajectoryType {
 
 	STATIC(StaticTrajectory.class),
 	SIMULATE(SimulateTrajectory.class),
-	ELLIPSE(ElipseTrajectory.class),
+	ELLIPSE(CircleTrajectory.class),
 	//CIRCLE(CercleTrajectory.class),
 	SHIP(ShipTrajectory.class);
 

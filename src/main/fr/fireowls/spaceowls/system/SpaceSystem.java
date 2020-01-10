@@ -151,7 +151,6 @@ public class SpaceSystem implements Updatable{
 		for(Corp c : this.corps) {
 			c.update(delta);
 		}
-		//hitboxManager.update(delta);
 	}
 
 
@@ -160,7 +159,6 @@ public class SpaceSystem implements Updatable{
 		for(Corp c : this.corps) {
 			c.render(canvas);
 		}
-		//hitboxManager.render(canvas);
 	}
 
 
