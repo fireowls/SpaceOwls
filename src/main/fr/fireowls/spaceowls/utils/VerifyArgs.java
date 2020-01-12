@@ -6,7 +6,7 @@ import java.io.FileReader;
 
 public class VerifyArgs {
 
-    private static final String DEFAULT_SYS = "res/system/04_ExempleDuSujet.astro";
+    public static final String DEFAULT_SYS = "";
 
     public static String verifyArgument(String[] args) {
         String sys = "";
