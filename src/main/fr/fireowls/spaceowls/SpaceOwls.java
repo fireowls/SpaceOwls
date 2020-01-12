@@ -22,7 +22,7 @@ import java.io.File;
 public class SpaceOwls extends Application {
 
     public static final String APP_NAME = "SpaceOwls";
-    public static final int FRAME_WIDTH = 500, FRAME_HEIGHT = 500;
+    public static final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 1000;
 
     private static String system;
 
