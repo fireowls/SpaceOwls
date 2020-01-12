@@ -2,11 +2,9 @@ package fr.fireowls.spaceowls.system.corp;
 
 import fr.fireowls.spaceowls.system.SpaceSystem;
 import fr.fireowls.spaceowls.system.trajectory.ShipTrajectory;
-import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
 public class ShipCorp extends Corp{
@@ -40,7 +38,7 @@ public class ShipCorp extends Corp{
 	public void render(Canvas canvas) {
 		trajectory.render(canvas);
 		canvas.getGraphicsContext2D().setFill(Color.BLUE);
-		canvas.getGraphicsContext2D().fillRect(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2, 50, 50);
+		canvas.getGraphicsContext2D().fillRect(location.getX()+ canvas.getWidth()/2, location.getY()+ canvas.getHeight()/2, 50, 50);
 	}
 
 	public double getPprincipal() {

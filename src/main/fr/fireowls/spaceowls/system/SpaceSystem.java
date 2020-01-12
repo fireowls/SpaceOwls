@@ -1,10 +1,8 @@
 package fr.fireowls.spaceowls.system;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.system.corp.CorpType;
 import fr.fireowls.spaceowls.system.corp.ShipCorp;

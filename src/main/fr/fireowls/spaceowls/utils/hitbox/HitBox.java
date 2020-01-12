@@ -1,6 +1,5 @@
 package fr.fireowls.spaceowls.utils.hitbox;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.collidable.Collidable;
@@ -9,6 +8,7 @@ import fr.fireowls.spaceowls.utils.hitbox.collidable.OnEnter;
 import fr.fireowls.spaceowls.utils.hitbox.collidable.OnExit;
 import fr.fireowls.spaceowls.utils.hitbox.shape.HitBoxShape;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +111,7 @@ public abstract class HitBox implements Collidable, Updatable {
 		return contacts.contains(other);
 	}
 
-    public abstract void draw(OwlPainter painter);
+    public abstract void draw(GraphicsContext painter);
 
 	public void setOnContact(OnContact onContact) {
 		this.onContact = onContact;

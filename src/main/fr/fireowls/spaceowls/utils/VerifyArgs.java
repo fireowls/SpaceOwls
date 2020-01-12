@@ -3,7 +3,6 @@ package fr.fireowls.spaceowls.utils;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class VerifyArgs {
 
@@ -45,4 +44,5 @@ public class VerifyArgs {
         }
         return sys;
     }
+  
 }

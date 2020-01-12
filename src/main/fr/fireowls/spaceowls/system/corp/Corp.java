@@ -1,13 +1,11 @@
 package fr.fireowls.spaceowls.system.corp;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.system.trajectory.Trajectory;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
 import fr.fireowls.spaceowls.utils.hitbox.HitBox;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class Corp implements Updatable {
 

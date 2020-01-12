@@ -1,7 +1,7 @@
 package fr.fireowls.spaceowls.utils.hitbox;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.utils.hitbox.shape.SquaredHitBoxShape;
+import javafx.scene.canvas.GraphicsContext;
 
 public class CircleHitBox extends HitBox{
  	protected double height;
@@ -14,7 +14,7 @@ public class CircleHitBox extends HitBox{
     }
 
     @Override
-    public void draw(OwlPainter painter) {
+    public void draw(GraphicsContext painter) {
         painter.strokeOval(location.getX(), location.getY(), width, height);
     }
 

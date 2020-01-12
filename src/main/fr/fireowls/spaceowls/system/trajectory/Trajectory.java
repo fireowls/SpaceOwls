@@ -3,9 +3,6 @@ package fr.fireowls.spaceowls.system.trajectory;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.fireowls.spaceowls.SpaceOwls;
-import fr.fireowls.spaceowls.engine.Engine;
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.utils.Location;
 import fr.fireowls.spaceowls.utils.Updatable;
@@ -112,7 +109,7 @@ public class Trajectory implements Updatable {
 		canvas.getGraphicsContext2D().setGlobalAlpha((float)(0.2));
 		for(int i = 0; i < previousLocation.size(); i++) {
 			Location l = previousLocation.get(i);
-			canvas.getGraphicsContext2D().fillRect(l.getX()+canvas.getWidth()/2, l.getY()+canvas.getHeight()/2, 1, 1);
+			canvas.getGraphicsContext2D().fillRect(l.getX()+ canvas.getWidth()/2, l.getY()+ canvas.getHeight()/2, 1, 1);
 		}
 		canvas.getGraphicsContext2D().setGlobalAlpha(1);
 	}

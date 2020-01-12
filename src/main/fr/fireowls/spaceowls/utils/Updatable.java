@@ -1,6 +1,5 @@
 package fr.fireowls.spaceowls.utils;
 
-import fr.fireowls.spaceowls.screen.OwlPainter;
 import javafx.scene.canvas.Canvas;
 
 public interface Updatable {
