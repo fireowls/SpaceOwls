@@ -183,9 +183,11 @@ public class FileInterpretor {
 				}
 				c.setMass(mass);
 				c.setName(name);
-				this.corpCreated.add(c);
-				elements.add(c);
-				System.out.println("Corp "+name+" created!");
+				if(!c.getType().equals(CorpType.ELLIPSE)) {
+					this.corpCreated.add(c);
+					elements.add(c);
+					System.out.println("Corp " + name + " created!");
+				}
 			}
 			
 		}
