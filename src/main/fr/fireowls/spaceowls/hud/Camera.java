@@ -1,4 +1,4 @@
-package fr.fireowls.spaceowls.screen;
+package fr.fireowls.spaceowls.hud;
 
 import fr.fireowls.spaceowls.system.corp.Corp;
 import fr.fireowls.spaceowls.utils.Location;
