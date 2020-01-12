@@ -14,6 +14,7 @@ import fr.fireowls.spaceowls.system.corp.SimuleCorp;
 import fr.fireowls.spaceowls.system.corp.StaticCorp;
 import fr.fireowls.spaceowls.utils.FileInterpretor;
 import fr.fireowls.spaceowls.utils.Location;
+import fr.fireowls.spaceowls.utils.VerifyArgs;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -35,8 +36,10 @@ public class SpaceOwls extends Application{
     private SpaceSystem ss;
     private Canvas canvas;
     private Corp corp;
+    public static String sys;
 
     public static void main(String...args) {
+        sys = VerifyArgs.verifyArgument(args);
         launch(args);
     }
 
@@ -45,7 +48,7 @@ public class SpaceOwls extends Application{
         SpaceOwls.stage = stage;
 
 
-        FileInterpretor fi = new FileInterpretor("res/system/02_PlanèteTourne.astro");
+        FileInterpretor fi = new FileInterpretor(sys);
         //ss = new SpaceSystem(0.01, 4, 500, 500);
         ss = fi.createSystem();
 
