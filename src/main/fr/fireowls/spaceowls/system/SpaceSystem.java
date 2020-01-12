@@ -169,6 +169,7 @@ public class SpaceSystem implements Updatable{
 		}
 		hitboxManager.dispose();
 	}
+	
 
 	public HitBoxManager getHitBoxManager() {
 		return hitboxManager;

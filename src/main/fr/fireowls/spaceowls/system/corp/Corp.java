@@ -19,6 +19,9 @@ public class Corp implements Updatable {
 	protected double mass;
 	protected String name;
 
+	protected double width;
+	protected double height;
+
 	public Corp(CorpType type, Location location) {
 		this(type, location, null, null);
 	}
@@ -36,6 +39,8 @@ public class Corp implements Updatable {
 		this.location = location;
 		setHitBox(hitBox);
 		setTrajectory(trajectory);
+		width = 50;
+		height = 50;
 	}
 
 	@Override
@@ -56,7 +61,7 @@ public class Corp implements Updatable {
 		//if (trajectory != null) trajectory.render(painter);
 		trajectory.render(canvas);
 		canvas.getGraphicsContext2D().setFill(Color.YELLOW);
-		canvas.getGraphicsContext2D().fillOval(location.getX() + canvas.getWidth()/2, location.getY() + canvas.getHeight()/2, 50, 50);
+		canvas.getGraphicsContext2D().fillOval(location.getX()+canvas.getWidth()/2, location.getY()+canvas.getHeight()/2,height,width);
 	}
 
 	@Override
@@ -107,6 +112,22 @@ public class Corp implements Updatable {
 	
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 	@Override
