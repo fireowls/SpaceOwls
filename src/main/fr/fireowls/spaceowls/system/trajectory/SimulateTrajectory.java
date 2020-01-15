@@ -69,3 +69,4 @@ public class SimulateTrajectory extends Trajectory {
 		vitY = ((float) (vitY + dirY * a));
 	}
 }
+.
